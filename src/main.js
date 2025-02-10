@@ -64,13 +64,18 @@ async function initComponents(modulePromise, uniwebInstance) {
 /**
  * Initializes the Runtime Environment
  * @param {Promise} modulePromise - Promise that resolves to remote components
- * @param {Object} configData - Configuration data for Uniweb instance
  * @param {Object} options - Additional options
  * @param {boolean} options.development - Enable development mode features
+ * @param {Object} options.configData - Configuration data for Uniweb instance
  * @returns {Promise<void>}
  */
-async function initRTE(modulePromise, configData, { development = false } = {}) {
+async function initRTE(modulePromise, { development = false, configData = null } = {}) {
+    configData ??=
+        JSON.parse(document.getElementById('__SITE_CONTENT__')?.textContent) ??
+        window.__SITE_CONTENT__;
+
     const uniwebInstance = initUniweb(configData);
+
     try {
         const success = await initComponents(modulePromise, uniwebInstance);
         if (success) {
