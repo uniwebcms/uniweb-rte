@@ -1,0 +1,231 @@
+<?xml version="1.0" encoding="utf-8"?>
+<style xmlns="http://purl.org/net/xbiblio/csl" xmlns:terms="http://purl.org/dc/terms/" version="1.0">
+    <info>
+        <title>IEEE Web</title>
+        <id>https://uniwebcms.com/styles/ieee-web</id>
+        <link href="https://uniwebcms.com/styles/ieee-web" rel="self" />
+        <!-- <link href="http://www.zotero.org/styles/ieee" rel="template"/> -->
+        <author>
+            <name>Uniweb CMS</name>
+            <email>support@uniwebcms.com</email>
+        </author>
+        <category citation-format="numeric" />
+        <category field="generic-base" />
+        <category field="science" />
+        <category field="engineering" />
+        <updated>2024-05-20T00:00:00+00:00</updated>
+        <summary>Uniweb style optimized for web use.</summary>
+    </info>
+
+    <!-- Macros for various reference components -->
+    <macro name="author">
+        <names variable="author">
+            <name form="short" initialize-with=". " delimiter=", " and="text" />
+        </names>
+    </macro>
+
+    <macro name="title">
+        <text variable="title" font-weight="bold" />
+    </macro>
+
+    <macro name="container-title">
+        <text variable="container-title" font-style="italic" />
+    </macro>
+
+    <macro name="issued">
+        <date variable="issued">
+            <date-part name="year" />
+        </date>
+    </macro>
+
+    <macro name="citation-locator">
+        <group delimiter=" ">
+            <text term="page" form="short" />
+            <text variable="page" />
+        </group>
+    </macro>
+
+    <macro name="accessed">
+        <group>
+            <text term="accessed" text-case="capitalize-first" suffix=": " />
+            <date variable="accessed">
+                <date-part name="year" />
+                <text> </text>
+                <date-part name="month" form="short" />
+                <text> </text>
+                <date-part name="day" />
+            </date>
+        </group>
+    </macro>
+
+    <macro name="URL">
+        <text variable="URL" prefix="Available at: " suffix="." />
+    </macro>
+
+    <!-- Citation layout -->
+    <citation>
+        <layout delimiter=". ">
+            <group delimiter=", ">
+                <text macro="author" />
+                <text macro="title" />
+                <text macro="container-title" />
+                <text variable="publisher-place" />
+                <text variable="publisher" />
+                <text macro="issued" />
+                <text macro="citation-locator" />
+                <text macro="URL" />
+                <text macro="accessed" />
+            </group>
+        </layout>
+    </citation>
+
+    <!-- Bibliography layout -->
+    <bibliography>
+        <layout hanging-indent="true" delimiter=". ">
+            <group delimiter=". ">
+                <text macro="author" />
+                <text macro="title" />
+                <text macro="container-title" />
+                <text variable="publisher-place" />
+                <text variable="publisher" />
+                <text macro="issued" />
+                <text macro="citation-locator" />
+                <text macro="URL" />
+                <text macro="accessed" />
+            </group>
+        </layout>
+    </bibliography>
+
+    <!-- Specific types -->
+    <citation>
+        <sort>
+            <key macro="issued" />
+        </sort>
+        <layout prefix="[" suffix="]">
+            <group delimiter=" ">
+                <text macro="author" />
+                <text macro="title" />
+                <text macro="container-title" />
+                <text macro="issued" />
+                <text macro="citation-locator" />
+                <text macro="URL" />
+            </group>
+        </layout>
+    </citation>
+
+    <!-- Journal Articles -->
+    <macro name="journal">
+        <group delimiter=", ">
+            <text macro="author" />
+            <text macro="title" />
+            <text macro="container-title" />
+            <text macro="issued" />
+            <text variable="volume" prefix="vol. " />
+            <text variable="issue" prefix="no. " />
+            <text variable="page" prefix="pp. " />
+            <text macro="URL" />
+        </group>
+    </macro>
+
+    <!-- Books -->
+    <macro name="book">
+        <group delimiter=", ">
+            <text macro="author" />
+            <text macro="title" />
+            <text macro="issued" />
+            <text variable="publisher" />
+            <text variable="publisher-place" />
+            <text macro="URL" />
+        </group>
+    </macro>
+
+    <!-- Book Chapters -->
+    <macro name="chapter">
+        <group delimiter=", ">
+            <text macro="author" />
+            <text macro="title" />
+            <text term="in" text-case="capitalize-first" suffix=": " />
+            <text variable="container-title" font-style="italic" />
+            <text variable="editor" prefix="(Ed.), " />
+            <text variable="page" prefix="pp. " />
+            <text macro="issued" />
+            <text variable="publisher" />
+            <text variable="publisher-place" />
+            <text macro="URL" />
+        </group>
+    </macro>
+
+    <!-- Conference Papers -->
+    <macro name="conference-paper">
+        <group delimiter=", ">
+            <text macro="author" />
+            <text macro="title" />
+            <text macro="container-title" />
+            <text macro="issued" />
+            <text variable="publisher" />
+            <text variable="publisher-place" />
+            <text macro="URL" />
+        </group>
+    </macro>
+
+    <!-- Interviews -->
+    <macro name="interview">
+        <group delimiter=", ">
+            <text macro="author" />
+            <text macro="title" />
+            <text term="interview" text-case="capitalize-first" suffix=" with" />
+            <text variable="interviewer" />
+            <text macro="issued" />
+            <text macro="URL" />
+        </group>
+    </macro>
+
+    <!-- Media -->
+    <macro name="media">
+        <group delimiter=", ">
+            <text macro="author" />
+            <text macro="title" />
+            <text variable="medium" />
+            <text macro="issued" />
+            <text macro="URL" />
+        </group>
+    </macro>
+
+    <!-- Define Types -->
+    <citation>
+        <layout prefix="[" suffix="]" delimiter=". ">
+            <choose>
+                <if type="article-journal">
+                    <text macro="journal" />
+                </if>
+                <else-if type="book">
+                    <text macro="book" />
+                </else-if>
+                <else-if type="chapter">
+                    <text macro="chapter" />
+                </else-if>
+                <else-if type="paper-conference">
+                    <text macro="conference-paper" />
+                </else-if>
+                <else-if type="interview">
+                    <text macro="interview" />
+                </else-if>
+                <else-if type="motion_picture" variable="medium">
+                    <text macro="media" />
+                </else-if>
+                <else>
+                    <group delimiter=", ">
+                        <text macro="author" />
+                        <text macro="title" />
+                        <text macro="container-title" />
+                        <text macro="issued" />
+                        <text variable="publisher-place" />
+                        <text variable="publisher" />
+                        <text macro="URL" />
+                        <text macro="accessed" />
+                    </group>
+                </else>
+            </choose>
+        </layout>
+    </citation>
+</style>
