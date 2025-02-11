@@ -37,32 +37,35 @@ module.exports = () => {
                 }
             ]
         },
+        resolve: {
+            extensions: ['.js', '.jsx']
+        }
         // externals: {
         //     // Define external dependencies (if needed), e.g., lodash:
         //     react: 'React',
         //     'react-dom': 'ReactDOM',
         //     'react-router-dom': 'ReactRouterDOM'
         // },
-        externals: {
-            react: {
-                commonjs: 'react',
-                commonjs2: 'react',
-                amd: 'react',
-                root: 'React'
-            },
-            'react-dom': {
-                commonjs: 'react-dom',
-                commonjs2: 'react-dom',
-                amd: 'react-dom',
-                root: 'ReactDOM'
-            },
-            'react-router-dom': {
-                commonjs: 'react-router-dom',
-                commonjs2: 'react-router-dom',
-                amd: 'react-router-dom',
-                root: 'ReactRouterDOM'
-            }
-        }
+        // externals: {
+        //     react: {
+        //         commonjs: 'react',
+        //         commonjs2: 'react',
+        //         amd: 'react',
+        //         root: 'React'
+        //     },
+        //     'react-dom': {
+        //         commonjs: 'react-dom',
+        //         commonjs2: 'react-dom',
+        //         amd: 'react-dom',
+        //         root: 'ReactDOM'
+        //     },
+        //     'react-router-dom': {
+        //         commonjs: 'react-router-dom',
+        //         commonjs2: 'react-router-dom',
+        //         amd: 'react-router-dom',
+        //         root: 'ReactRouterDOM'
+        //     }
+        // }
         // optimization: {
         //     splitChunks: {
         //         cacheGroups: {
