@@ -1,4 +1,5 @@
 import Input from './input.js';
+import { parseContent } from '@uniwebcms/semantic-parser';
 
 export default class Block {
     constructor(blockData, id) {
@@ -6,24 +7,35 @@ export default class Block {
         this.component = blockData.component;
         this.Component = null;
 
+        console.log('BLOCK DATA', blockData);
+        this.parsedContent = parseContent(blockData.content);
+
+        console.log('PARSED', this.parsedContent);
+
         this.main = {
-            header: {
-                title: blockData.title || '',
-                pretitle: blockData.pretitle || '',
-                subtitle: blockData.subtitle || ''
-            },
-            banner: blockData.banner || null,
-            body: {
-                links: blockData.links || [],
-                paragraphs: blockData.paragraphs || [],
-                imgs: blockData.images || [],
-                icons: blockData.icons || [],
-                videos: blockData.videos || [],
-                lists: blockData.lists || [],
-                buttons: blockData.buttons || [],
-                properties: blockData.properties || {}
-            }
+            header: this.parsedContent.groups.main.headings
         };
+
+        console.log('MAIN', this.main);
+
+        // this.main = {
+        //     header: {
+        //         title: blockData.title || '',
+        //         pretitle: blockData.pretitle || '',
+        //         subtitle: blockData.subtitle || ''
+        //     },
+        //     banner: blockData.banner || null,
+        //     body: {
+        //         links: blockData.links || [],
+        //         paragraphs: blockData.paragraphs || [],
+        //         imgs: blockData.images || [],
+        //         icons: blockData.icons || [],
+        //         videos: blockData.videos || [],
+        //         lists: blockData.lists || [],
+        //         buttons: blockData.buttons || [],
+        //         properties: blockData.properties || {}
+        //     }
+        // };
 
         this.themeName = blockData.themeName || 'light';
         this.standardOptions = blockData.standardOptions || {};

@@ -3,7 +3,7 @@ import Profile from './profile.js';
 
 export default class Uniweb {
     constructor(configData) {
-        this.activeWebsite = new Website(configData.website);
+        this.activeWebsite = new Website(configData);
         this.childBlockRenderer = null;
         this.routingComponents = {};
         this.remoteComponents = {};

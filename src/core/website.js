@@ -5,7 +5,7 @@ export default class Website {
         this.pages = websiteData.pages.map((page, index) => new Page(page, index));
         this.activePage = this.pages[0];
         this.pageRoutes = this.pages.map((page) => page.route);
-        this.themeData = websiteData.themeData;
+        this.themeData = websiteData.theme;
         this.routingComponents = {};
         this.activeLang = 'en';
         this.langs = [
