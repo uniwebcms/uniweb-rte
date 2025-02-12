@@ -6,7 +6,7 @@ export default function LazyCiteRender({ data, style = 'apa', locale = 'en-US' }
     const [Cite, setCite] = useState(null);
 
     useEffect(() => {
-        import('citation-js')
+        import(/* webpackChunkName: "citation-styles" */ 'citation-js')
             .then((mod) => setCite(mod.default || mod))
             .catch((error) =>
                 console.error('Failed to load citation-js in LazyCiteRender:', error)

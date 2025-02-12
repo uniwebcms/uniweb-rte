@@ -86,6 +86,19 @@ async function initRTE(modulePromise, { development = false, configData = null }
     } catch (error) {
         console.error('Failed to initialize RTE:', error);
     }
+
+    // Print a success message to the console
+    if (!development) {
+        console.log(
+            `%c<%c>%c Uniweb RTE %c(v${APP_VERSION})`,
+            'color: #FA8400; font-weight: bold; font-size: 18px;', // orange
+            'color: #00ADFE; font-weight: bold; font-size: 18px;', // blue
+            "color: #333; font-size: 18px; font-family: 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;", // text
+            'color: #666; font-size: 9px; font-style: italic;' // version
+        );
+        // console.log('%c', 'color: #555');
+        console.log('%cStart Fast, Go Far', 'color: #555; font-size: 12px; font-style: italic;');
+    }
 }
 
 /**
