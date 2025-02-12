@@ -6,7 +6,8 @@
     "author": "Proximify Inc.",
     "scripts": {
         "build": "webpack",
-        "rebuild": "rm -rf dist && npm run build"
+        "rebuild": "rm -rf dist && npm run build",
+        "build:dev": "webpack --watch --mode=development"
     },
     "main": "dist/main.js",
     "files": [

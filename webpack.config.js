@@ -2,9 +2,9 @@ const path = require('path');
 const webpack = require('webpack');
 const packageJson = require('./package.json');
 
-module.exports = () => {
+module.exports = (env, argv) => {
     return {
-        mode: 'production',
+        mode: argv.mode || 'production',
         entry: path.resolve(__dirname, 'src', 'main.js'),
         output: {
             // filename: '[name].[contenthash].js',
@@ -43,6 +43,11 @@ module.exports = () => {
             new webpack.DefinePlugin({
                 APP_VERSION: JSON.stringify(packageJson.version)
             })
-        ]
+        ],
+        watchOptions: {
+            ignored: /node_modules|dist/, // Ignore node_modules and dist folder
+            aggregateTimeout: 300, // Delay rebuilds slightly
+            poll: 1000 // Enable polling (set to undefined if using native FS watchers)
+        }
     };
 };
