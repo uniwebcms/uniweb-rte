@@ -115,3 +115,6 @@ typings/
 
 # Build output
 dist/
+
+# Work In Progress folder
+wip/
