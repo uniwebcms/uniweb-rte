@@ -13,13 +13,13 @@ module.exports = () => {
             // chunkFilename: '[name].js',
             path: path.resolve(__dirname, 'dist'),
             clean: true,
-            publicPath: 'auto'
-            // library: {
-            //     name: 'uniwebRe',
-            //     type: 'umd', // Supports CommonJS, AMD, and global variables
-            //     umdNamedDefine: true
-            // },
-            // globalObject: 'this' // Ensures compatibility in both Node.js & browser
+            publicPath: 'auto',
+            library: {
+                name: 'uniwebRe',
+                type: 'umd', // Supports CommonJS, AMD, and global variables
+                umdNamedDefine: true
+            },
+            globalObject: 'this' // Ensures compatibility in both Node.js & browser
         },
         module: {
             rules: [
