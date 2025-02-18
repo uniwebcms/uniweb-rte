@@ -1,5 +1,7 @@
 import Input from './input.js';
 import { parseContent } from '@uniwebcms/semantic-parser';
+// import processGroups from '../../local-parser/groups.js';
+// import processSequence from '../../local-parser/sequence.js';
 
 export default class Block {
     constructor(blockData, id) {
@@ -7,16 +9,32 @@ export default class Block {
         this.component = blockData.component;
         this.Component = null;
 
-        console.log('BLOCK DATA', blockData);
+        // console.log('BLOCK DATA', blockData);
         this.parsedContent = parseContent(blockData.content);
 
-        console.log('PARSED', this.parsedContent);
+        const { sequences, groups } = this.parsedContent;
 
-        this.main = {
-            header: this.parsedContent.groups.main.headings
-        };
+        // const sequences = processSequence(blockData.content);
 
-        console.log('MAIN', this.main);
+        console.log('sequences', sequences);
+
+        const { main, items } = groups;
+
+        console.log('processGroups', main, items);
+
+        this.main = main;
+        this.items = items;
+
+        // console.log('sequence', sequences);
+        // console.log('group', group);
+
+        // console.log('parsed', this.parsedContent);
+
+        // this.main = {
+        //     header: this.parsedContent.groups.main.headings
+        // };
+
+        // console.log('MAIN', this.main);
 
         // this.main = {
         //     header: {
@@ -37,11 +55,15 @@ export default class Block {
         //     }
         // };
 
-        this.themeName = blockData.themeName || 'light';
-        this.standardOptions = blockData.standardOptions || {};
+        const blockConfig = blockData.generic || {};
 
-        this.childBlocks = blockData.childBlocks
-            ? blockData.childBlocks.map((block, i) => new Block(block, `${id}_${i}`))
+        this.themeName = `context__${blockConfig.theme || 'light'}`;
+        this.standardOptions = blockConfig.standardOptions || {};
+
+        this.properties = blockConfig.properties || {};
+
+        this.childBlocks = blockData.subsections
+            ? blockData.subsections.map((block, i) => new Block(block, `${id}_${i}`))
             : [];
 
         this.input = blockData.input ? new Input(blockData.input) : null;
@@ -57,16 +79,43 @@ export default class Block {
     }
 
     getBlockContent() {
+        const mainHeader = this.main?.header || {};
+        const mainBody = this.main?.body || {};
+        const banner = this.main?.banner || null;
+
+        let title = mainHeader?.title || '';
+        let pretitle = mainHeader?.pretitle || '';
+        let subtitle = mainHeader?.subtitle || '';
+        let description = mainHeader?.description || '';
+
+        let properties = mainBody?.propertyBlocks?.[0] || {};
+        let links = mainBody?.links || [];
+        let images = mainBody?.imgs || [];
+        let paragraphs = mainBody?.paragraphs || [];
+        let icons = mainBody?.icons || [];
+        let videos = mainBody?.videos || [];
+        let lists = mainBody?.lists || [];
+        let buttons = mainBody?.buttons || [];
+
         return {
-            ...this.main.header,
-            ...this.main.body,
-            images: this.main.body.imgs,
-            banner: this.main.banner
+            banner,
+            pretitle,
+            title,
+            subtitle,
+            description,
+            paragraphs,
+            images,
+            links,
+            icons,
+            properties,
+            videos,
+            lists,
+            buttons
         };
     }
 
     getBlockProperties() {
-        return this.main.body.properties;
+        return this.properties;
     }
 
     getChildBlockRenderer() {

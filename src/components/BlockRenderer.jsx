@@ -1,4 +1,4 @@
-import React, { lazy, Suspense, useEffect, isValidElement } from 'react';
+import React from 'react';
 
 const hexToRgba = (hex, opacity) => {
     const r = parseInt(hex.slice(1, 3), 16);
@@ -112,6 +112,8 @@ const getWrapperProps = (block) => {
 
 export default function BlockRenderer(props) {
     const { block, pure = false, extra = {} } = props;
+
+    console.log("content", block.getBlockContent());  
 
     const Component = block.getComponent();
 

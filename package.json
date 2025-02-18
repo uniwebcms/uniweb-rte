@@ -1,7 +1,7 @@
 {
     "name": "@uniwebcms/uniweb-rte",
     "private": false,
-    "version": "1.1.6",
+    "version": "1.1.7",
     "license": "GPL-3.0-or-later",
     "author": "Proximify Inc.",
     "scripts": {
@@ -15,7 +15,7 @@
     ],
     "dependencies": {
         "@babel/runtime": "^7.23.0",
-        "@uniwebcms/semantic-parser": "^1.0.0",
+        "@uniwebcms/semantic-parser": "^1.0.2",
         "citation-js": "^0.7.14",
         "dompurify": "^3.1.7",
         "html-react-parser": "^5.1.5",
