@@ -9,7 +9,7 @@ export default function WebsiteRenderer(props) {
 
     return (
         <>
-            {/* <Fonts fontsData={website.themeData.importedFonts}></Fonts> */}
+            <Fonts fontsData={website.themeData.importedFonts}></Fonts>
             <Style hasSourceMap={false} name="color-themes">
                 {buildThemeStyles(website.themeData)}
             </Style>

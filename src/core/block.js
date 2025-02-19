@@ -1,7 +1,5 @@
 import Input from './input.js';
 import { parseContent } from '@uniwebcms/semantic-parser';
-// import processGroups from '../../local-parser/groups.js';
-// import processSequence from '../../local-parser/sequence.js';
 
 export default class Block {
     constructor(blockData, id) {
@@ -9,53 +7,16 @@ export default class Block {
         this.component = blockData.component;
         this.Component = null;
 
-        // console.log('BLOCK DATA', blockData);
         this.parsedContent = parseContent(blockData.content);
 
-        const { sequences, groups } = this.parsedContent;
-
-        // const sequences = processSequence(blockData.content);
-
-        console.log('sequences', sequences);
-
-        const { main, items } = groups;
-
-        console.log('processGroups', main, items);
+        const {
+            groups: { main, items }
+        } = this.parsedContent;
 
         this.main = main;
         this.items = items;
 
-        // console.log('sequence', sequences);
-        // console.log('group', group);
-
-        // console.log('parsed', this.parsedContent);
-
-        // this.main = {
-        //     header: this.parsedContent.groups.main.headings
-        // };
-
-        // console.log('MAIN', this.main);
-
-        // this.main = {
-        //     header: {
-        //         title: blockData.title || '',
-        //         pretitle: blockData.pretitle || '',
-        //         subtitle: blockData.subtitle || ''
-        //     },
-        //     banner: blockData.banner || null,
-        //     body: {
-        //         links: blockData.links || [],
-        //         paragraphs: blockData.paragraphs || [],
-        //         imgs: blockData.images || [],
-        //         icons: blockData.icons || [],
-        //         videos: blockData.videos || [],
-        //         lists: blockData.lists || [],
-        //         buttons: blockData.buttons || [],
-        //         properties: blockData.properties || {}
-        //     }
-        // };
-
-        const blockConfig = blockData.generic || {};
+        const blockConfig = blockData.config || {};
 
         this.themeName = `context__${blockConfig.theme || 'light'}`;
         this.standardOptions = blockConfig.standardOptions || {};

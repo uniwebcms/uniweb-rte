@@ -113,7 +113,7 @@ const getWrapperProps = (block) => {
 export default function BlockRenderer(props) {
     const { block, pure = false, extra = {} } = props;
 
-    console.log("content", block.getBlockContent());  
+    // console.log("content", block.getBlockContent());  
 
     const Component = block.getComponent();
 
