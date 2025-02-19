@@ -86,13 +86,14 @@ export default class Block {
     getNextBlockInfo() {
         const website = uniweb.activeWebsite;
         const page = website.activePage;
+        const pageBlocks = page.getPageBlocks();
 
-        const currIndex = page.blocks.findIndex((b) => b.id === this.id);
+        const currIndex = pageBlocks.findIndex((b) => b.id === this.id);
         const nextIndex = currIndex + 1;
 
         return {
-            theme: page.blocks[nextIndex].themeName,
-            category: page.blocks[nextIndex].component,
+            theme: pageBlocks[nextIndex].themeName,
+            category: pageBlocks[nextIndex].component,
             state: {}
         };
     }

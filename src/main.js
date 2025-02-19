@@ -51,9 +51,11 @@ async function initComponents(modulePromise, uniwebInstance) {
         // Await the remote module promise passed from the site builder.
         const remoteModule = await modulePromise;
         // Handle double `default` wrapping issue when CommonJS is imported into ES6 module.
-        const components = remoteModule?.default?.default || remoteModule?.default;
+        const innerModule = remoteModule?.default?.default ? remoteModule.default : remoteModule;
         // Initialize the uniweb instance with the remote components.
-        uniwebInstance.setRemoteComponents(components);
+        uniwebInstance.setRemoteComponents(innerModule.default);
+        // Set the remote configuration data.
+        uniwebInstance.setRemoteConfig(innerModule.config || innerModule.site || {});
         return true;
     } catch (error) {
         console.error('Failed to load remote module:', error.message || error);

@@ -2,11 +2,22 @@ import Page from './page.js';
 
 export default class Website {
     constructor(websiteData) {
-        this.pages = websiteData.pages.map((page, index) => new Page(page, index));
-        this.activePage = this.pages[0];
+        const { pages, theme } = websiteData;
+
+        this.pages = pages
+            .filter((page) => page.route !== '/@header' && page.route !== '/@footer')
+            .map(
+                (page, index) =>
+                    new Page(
+                        page,
+                        index,
+                        pages.find((p) => p.route === '/@header'),
+                        pages.find((p) => p.route === '/@footer')
+                    )
+            );
+        this.activePage = this.pages.find((page) => page.route === '/index') || this.pages[0];
         this.pageRoutes = this.pages.map((page) => page.route);
-        this.themeData = websiteData.theme;
-        this.routingComponents = {};
+        this.themeData = theme;
         this.activeLang = 'en';
         this.langs = [
             {
@@ -18,6 +29,14 @@ export default class Website {
                 value: 'fr'
             }
         ];
+    }
+
+    getRemoteLayout() {
+        return uniweb.remoteConfig.Layout || null;
+    }
+
+    getRemoteProps() {
+        return uniweb.remoteConfig.props || null;
     }
 
     getRoutingComponents() {

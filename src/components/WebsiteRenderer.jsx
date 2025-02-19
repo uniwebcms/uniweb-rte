@@ -7,6 +7,8 @@ import Fonts from './Fonts.jsx';
 export default function WebsiteRenderer(props) {
     const website = uniweb.activeWebsite;
 
+    const RemoteLayout = website.getRemoteLayout();
+
     return (
         <>
             <Fonts fontsData={website.themeData.importedFonts}></Fonts>

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import BlockRenderer from './BlockRenderer.jsx';
 
 const ChildBlocks = (props) => {
@@ -14,11 +14,21 @@ const ChildBlocks = (props) => {
 export default function PageRenderer(props) {
     const page = uniweb.activeWebsite.activePage;
 
+    const pageTitle = page?.title || 'Website';
+
+    useEffect(() => {
+        document.title = pageTitle;
+
+        return () => {
+            document.title = 'Website';
+        };
+    }, [pageTitle]);
+
     if (!page) {
         return null;
     }
 
-    const { blocks } = page;
+    const blocks = page.getPageBlocks();
 
     return blocks.map((block, index) => (
         <React.Fragment key={index}>
