@@ -1,8 +1,13 @@
-const path = require('path');
-const webpack = require('webpack');
-const packageJson = require('./package.json');
+// webpack.config.js
+import path from 'path';
+import { fileURLToPath } from 'url';
+import webpack from 'webpack';
+import packageJson from './package.json' assert { type: 'json' };
 
-module.exports = (env, argv) => {
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+export default (env, argv) => {
     return {
         mode: argv.mode || 'production',
         entry: path.resolve(__dirname, 'src', 'main.js'),
@@ -10,7 +15,6 @@ module.exports = (env, argv) => {
             // filename: '[name].[contenthash].js',
             filename: '[name].js',
             chunkFilename: '[name].[contenthash].js',
-            // chunkFilename: '[name].js',
             path: path.resolve(__dirname, 'dist'),
             clean: true,
             publicPath: 'auto',
@@ -50,7 +54,7 @@ module.exports = (env, argv) => {
             })
         ],
         watchOptions: {
-            ignored: /node_modules|dist/, // Ignore node_modules and dist folder
+            ignored: /node_modules|dist/,
             aggregateTimeout: 300, // Delay rebuilds slightly
             poll: 1000 // Enable polling (set to undefined if using native FS watchers)
         }
