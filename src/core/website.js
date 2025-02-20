@@ -93,7 +93,8 @@ export default class Website {
                 href: page.route,
                 route: page.route,
                 description: page.description,
-                content: page.blocks
+                content: page
+                    .getPageBlocks()
                     .map((b) => b.title)
                     .filter(Boolean)
                     .join('\n')

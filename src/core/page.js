@@ -6,7 +6,7 @@ export default class Page {
         this.route = pageData.route;
         this.title = pageData.title;
         this.description = pageData.description;
-        // this.blocks = pageData.sections.map((section, index) => new Block(section, index));
+
         this.pageBlocks = this.buildPageBlocks(
             pageData.sections,
             pageHeader?.sections,
