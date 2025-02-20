@@ -15,11 +15,16 @@ module.exports = (env, argv) => {
             clean: true,
             publicPath: 'auto',
             library: {
-                name: 'uniwebRe',
-                type: 'umd', // Supports CommonJS, AMD, and global variables
-                umdNamedDefine: true
-            },
-            globalObject: 'this' // Ensures compatibility in both Node.js & browser
+                type: 'module'
+            }
+        },
+        experiments: {
+            outputModule: true // Required for library.type: 'module'
+        },
+        externals: {
+            react: 'react',
+            'react-dom': 'react-dom',
+            'react-router-dom': 'react-router-dom'
         },
         module: {
             rules: [
