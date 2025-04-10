@@ -117,6 +117,11 @@ function render({ development = false } = {}) {
     }
     const root = createRoot(container);
 
+    // Note: SITE_BASENAME is injected via webpack. This value is not defined within
+    // this project but is provided (if needed) during build time by the parent project.
+    // If SITE_BASENAME is undefined, Router will use the root URL (no basename)
+    const basename = typeof SITE_BASENAME !== 'undefined' ? SITE_BASENAME : undefined;
+
     const app = (
         <ErrorBoundary
             fallback={
@@ -126,7 +131,7 @@ function render({ development = false } = {}) {
                 </div>
             }
         >
-            <BrowserRouter>
+            <BrowserRouter basename={basename}>
                 <Routes>
                     <Route path="/" element={<WebsiteRenderer />} />
                 </Routes>
