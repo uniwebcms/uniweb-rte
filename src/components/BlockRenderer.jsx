@@ -81,7 +81,16 @@ const getWrapperProps = (block) => {
         if (mode === 'gradient') {
             const gradientSettings = background?.gradient || {};
 
-            let { enabled = false, start, end, angle = 0, startPosition = 0, endPosition = 100, startOpacity = 0.7, endOpacity = 0.3 } = gradientSettings;
+            let {
+                enabled = false,
+                start,
+                end,
+                angle = 0,
+                startPosition = 0,
+                endPosition = 100,
+                startOpacity = 0.7,
+                endOpacity = 0.3
+            } = gradientSettings;
 
             if (uniweb.toBoolean(enabled)) {
                 start = start || 'transparent';
@@ -113,9 +122,7 @@ const getWrapperProps = (block) => {
 export default function BlockRenderer(props) {
     const { block, pure = false, extra = {} } = props;
 
-    // console.log("content", block.getBlockContent());  
-
-    const Component = block.getComponent();
+    const Component = block.initComponent();
 
     if (!Component) {
         console.warn('failed to load component', block.component);

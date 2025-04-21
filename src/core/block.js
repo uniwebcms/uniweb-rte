@@ -32,11 +32,23 @@ export default class Block {
         this.startState = null;
         this.state = null;
         this.resetStateHook = null;
-        this.initState();
+
+        Object.preventExtensions(this);
     }
 
-    getComponent() {
-        return window.uniweb.getRemoteComponent(this.component);
+    initComponent() {
+        // Initialize only once
+        if (this.Component) return this.Component;
+
+        this.Component = uniweb.getRemoteComponent(this.component);
+        if (!this.Component) return null;
+
+        const defaults = this.Component.blockDefaults || { state: this.Component.blockState };
+        this.startState = defaults.state ? { ...defaults.state } : null;
+
+        this.initState();
+
+        return this.Component;
     }
 
     getBlockContent() {
@@ -122,9 +134,7 @@ export default class Block {
     }
 
     initState() {
-        this.startState = this.Component?.blockState ? { ...this.Component.blockState } : null;
         this.state = this.startState;
-
         if (this.resetStateHook) this.resetStateHook();
     }
 
