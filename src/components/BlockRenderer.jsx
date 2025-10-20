@@ -130,6 +130,8 @@ export default function BlockRenderer(props) {
     }
 
     const componentProps = {
+        content: block.parsedContent.groups,
+        params: block.properties,
         block,
         page: uniweb.activeWebsite.activePage,
         website: uniweb.activeWebsite,
